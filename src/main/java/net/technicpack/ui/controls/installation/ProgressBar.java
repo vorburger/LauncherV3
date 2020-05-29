@@ -67,8 +67,8 @@ public class ProgressBar extends JLabel implements DownloadListener {
 
         Shape clip = g2d.getClip();
 
-        if (getBackFill() != null) {
-            g2d.setColor(getBackFill());
+        if (backFillColor != null) {
+            g2d.setColor(backFillColor);
             g2d.clipRect(x, y, width, height);
             g2d.fillRoundRect(x, y, width, height, height, height);
         }

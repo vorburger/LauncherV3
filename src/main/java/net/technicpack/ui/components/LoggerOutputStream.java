@@ -28,7 +28,7 @@ public class LoggerOutputStream extends ByteArrayOutputStream {
     private final String separator = System.getProperty("line.separator");
     private final Console console;
     private final Level level;
-    private final Logger log;
+    private static final Logger log;
 
     public LoggerOutputStream(Console console, Level level, Logger log) {
         super();

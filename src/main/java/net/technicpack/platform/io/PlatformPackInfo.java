@@ -129,7 +129,7 @@ public class PlatformPackInfo extends RestObject implements PackInfo {
     }
 
     public boolean hasSolder() {
-        return solder != null && !solder.equals("");
+        return solder != null && !solder.isEmpty();
     }
 
     public String getDescription() {

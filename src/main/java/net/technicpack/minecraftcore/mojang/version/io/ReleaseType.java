@@ -45,7 +45,7 @@ public enum ReleaseType {
 
 	static {
 		for (ReleaseType type : values()) {
-			lookup.put(type.getName(), type);
+			lookup.put(type.name, type);
 		}
 	}
 }

@@ -52,6 +52,6 @@ public class FeedItem {
     }
 
     public AuthorshipInfo getAuthorship() {
-        return new AuthorshipInfo(getUser(), getAvatar(), getDate());
+        return new AuthorshipInfo(user, avatar, getDate());
     }
 }

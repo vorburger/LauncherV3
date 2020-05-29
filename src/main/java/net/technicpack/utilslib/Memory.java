@@ -83,12 +83,12 @@ public class Memory {
 
     public static Memory getClosestAvailableMemory(Memory memory, boolean is64Bit) {
         long available = getAvailableMemory(is64Bit);
-        if (memory.getMemoryMB() <= available)
+        if (memory.memory <= available)
             return memory;
 
         Memory bestMemory = Memory.memoryOptions[0];
         for (Memory option : Memory.memoryOptions) {
-            if (option.getMemoryMB() <= available && option.getMemoryMB() > bestMemory.getMemoryMB())
+            if (option.memory <= available && option.memory > bestMemory.memory)
                 bestMemory = option;
         }
 
@@ -119,7 +119,7 @@ public class Memory {
 
     public static Memory getMemoryFromId(int id) {
         for (Memory m : memoryOptions) {
-            if (m.getSettingsId() == id) {
+            if (m.option == id) {
                 return m;
             }
         }
@@ -127,6 +127,6 @@ public class Memory {
     }
 
     public String toString() {
-        return getDescription();
+        return text;
     }
 }

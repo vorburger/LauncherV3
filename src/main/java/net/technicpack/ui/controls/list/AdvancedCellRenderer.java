@@ -48,11 +48,11 @@ public class AdvancedCellRenderer extends JLabel implements ListCellRenderer {
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         if (isSelected) {
-            setBackground(getSelectedBackgroundColor());
-            setForeground(getSelectedForegroundColor());
+            setBackground(selectedBackground);
+            setForeground(selectedForeground);
         } else {
-            setBackground(getUnselectedBackgroundColor());
-            setForeground(getUnselectedForegroundColor());
+            setBackground(unselectedBackground);
+            setForeground(unselectedForeground);
         }
 
         this.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));

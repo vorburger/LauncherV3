@@ -88,10 +88,10 @@ public abstract class Relauncher {
         InstallTasksQueue updateTasksQueue;
         if (isMover()) {
             updateTasksQueue = buildMoverTasks();
-        } else if (needsReboot && getCurrentBuild() > 0) {
+        } else if (needsReboot && currentBuild > 0) {
             relaunch();
             return false;
-        } else if (getCurrentBuild() < 1) {
+        } else if (currentBuild < 1) {
             return true;
         } else {
             updateTasksQueue = buildUpdaterTasks();

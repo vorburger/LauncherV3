@@ -58,7 +58,7 @@ public class TechnicUserStore implements IUserStore<MojangUser> {
             TechnicUserStore newModel = MojangUtils.getGson().fromJson(json, TechnicUserStore.class);
 
             if (newModel != null) {
-                newModel.setUserFile(userFile);
+                newModel.usersFile = userFile;
                 return newModel;
             }
         } catch (JsonSyntaxException | IOException e) {

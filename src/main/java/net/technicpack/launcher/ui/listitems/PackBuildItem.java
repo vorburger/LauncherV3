@@ -54,12 +54,12 @@ public class PackBuildItem {
             return false;
         PackBuildItem item = (PackBuildItem)obj;
 
-        return item.getBuildNumber().equals(buildNumber);
+        return item.buildNumber.equals(buildNumber);
     }
 
     @Override
     public int hashCode() {
-        return getBuildNumber().hashCode();
+        return buildNumber.hashCode();
     }
 
     @Override

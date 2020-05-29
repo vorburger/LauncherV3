@@ -36,7 +36,7 @@ public class Rule {
         for (int i = rules.size() - 1; i >= 0; i--) {
             Rule rule = rules.get(i);
             if (rule.isApplicable(opts)) {
-                return !rule.isNegated();
+                return !rule.negated;
             }
         }
         return false;

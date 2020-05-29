@@ -75,7 +75,7 @@ public class TintablePanel extends JPanel {
         super.paint(graphics);
 
         if (tintActive) {
-            graphics.setColor(getTintColor());
+            graphics.setColor(tintColor);
             graphics.fillRect(0,0,getWidth(),getHeight());
         }
     }

@@ -140,7 +140,7 @@ public class ResourceLoader {
 
     public ResourceLoader getVariant(Locale locale) {
         ResourceLoader variant = new ResourceLoader(this);
-        variant.setSupportedLanguages(locales);
+        variant.locales = locales;
         variant.setLocale(locale);
         return variant;
     }

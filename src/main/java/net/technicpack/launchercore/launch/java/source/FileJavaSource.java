@@ -65,7 +65,7 @@ public class FileJavaSource implements IVersionSource {
         try {
             String sourceText = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             FileJavaSource source = Utils.getGson().fromJson(sourceText, FileJavaSource.class);
-            source.setLoadedFile(file);
+            source.loadedFile = file;
             return source;
         } catch (IOException ex) {
             ex.printStackTrace();

@@ -44,7 +44,7 @@ public class LaunchOptions {
     }
 
     public void appendToCommands(LaunchCommandCollector commands) {
-        if (getTitle() != null) {
+        if (title != null) {
             commands.addUnique("--title", title);
         }
 
@@ -55,8 +55,8 @@ public class LaunchOptions {
             commands.addUnique("--height", Integer.toString(options.getCustomHeight()));
         }
 
-        if (getIconPath() != null) {
-            commands.addUnique("--icon", getIconPath());
+        if (iconPath != null) {
+            commands.addUnique("--icon", iconPath);
         }
     }
 

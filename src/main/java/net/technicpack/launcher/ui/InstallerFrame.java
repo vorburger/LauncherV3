@@ -567,7 +567,7 @@ public class InstallerFrame extends DraggableFrame implements IRelocalizableReso
         portableInstallButton.addActionListener(e -> portableInstall());
         portableInstallButton.setEnabled(false);
 
-        if (!installDir.equals("")) {
+        if (!installDir.isEmpty()) {
             portableInstallButton.setForeground(LauncherFrame.COLOR_BUTTON_BLUE);
             portableInstallButton.setEnabled(true);
         }

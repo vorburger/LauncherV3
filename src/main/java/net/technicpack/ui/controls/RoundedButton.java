@@ -110,8 +110,8 @@ public class RoundedButton extends JButton implements MouseListener {
 
         Icon currentIcon = getIcon();
 
-        if (isHovered && getHoverIcon() != null)
-            currentIcon = getHoverIcon();
+        if (isHovered && hoverIcon != null)
+            currentIcon = hoverIcon;
 
         if (currentIcon != null)
             textX += (getIconTextGap() + currentIcon.getIconWidth());

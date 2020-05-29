@@ -59,7 +59,7 @@ public class NewsArticle {
     }
 
     public AuthorshipInfo getAuthorshipInfo() {
-        return new AuthorshipInfo(getUsername(), getAvatar(), getDate());
+        return new AuthorshipInfo(username, avatar, getDate());
     }
 
     public String getUrl() {

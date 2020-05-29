@@ -46,7 +46,7 @@ public class SimpleTabPane extends JTabbedPane {
     @Override
     public Color getBackgroundAt(int index) {
         if (getSelectedIndex() == index)
-            return getSelectedBackground();
+            return selectedBackground;
         else
             return getBackground();
     }
@@ -54,7 +54,7 @@ public class SimpleTabPane extends JTabbedPane {
     @Override
     public Color getForegroundAt(int index) {
         if (getSelectedIndex() == index)
-            return getSelectedForeground();
+            return selectedForeground;
         else
             return getForeground();
     }

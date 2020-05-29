@@ -159,7 +159,7 @@ public class MojangUtils {
         } else { // fallback: check if "arguments" key exists since only 1.13+ should have it
             versionJsonType = root.has("arguments") ? CompleteVersionV21.class : CompleteVersion.class;
         }
-        return getGson().fromJson(root, versionJsonType);
+        return gson.fromJson(root, versionJsonType);
     }
 
     public static boolean isLegacyVersion(String version) {

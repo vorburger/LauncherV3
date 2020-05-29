@@ -176,10 +176,10 @@ public class ModpackModel {
     }
 
     public String getWebSite() {
-        if (getPackInfo() == null)
+        if (packInfo == null)
             return null;
 
-        return getPackInfo().getWebSite();
+        return packInfo.getWebSite();
     }
 
     public Resource getIcon() {
