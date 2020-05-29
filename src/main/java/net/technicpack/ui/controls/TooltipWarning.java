@@ -43,7 +43,7 @@ public class TooltipWarning extends JLabel {
         return tooltip;
     }
 
-    private class WarningTooltip extends JToolTip {
+    private static class WarningTooltip extends JToolTip {
 
         public WarningTooltip() {
             setUI(new WarningTooltipUI());

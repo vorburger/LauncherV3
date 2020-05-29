@@ -5,7 +5,6 @@ import net.technicpack.launchercore.modpacks.ModpackModel;
 import net.technicpack.rest.io.Modpack;
 
 import java.io.File;
-import java.io.IOException;
 
 public class CheckRundataFile implements IInstallTask {
     private final ModpackModel modpackModel;

@@ -30,7 +30,6 @@ import net.technicpack.minecraftcore.mojang.version.MojangVersion;
 import net.technicpack.minecraftcore.mojang.version.io.AssetIndex;
 
 import java.io.File;
-import java.io.IOException;
 
 public class EnsureAssetsIndexTask implements IInstallTask {
 

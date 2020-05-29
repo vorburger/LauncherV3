@@ -27,17 +27,12 @@ import net.technicpack.launcher.ui.controls.feeds.NewsWidget;
 import net.technicpack.launchercore.image.ImageRepository;
 import net.technicpack.platform.IPlatformApi;
 import net.technicpack.platform.io.AuthorshipInfo;
-import net.technicpack.platform.io.NewsArticle;
 import net.technicpack.platform.io.NewsData;
 import net.technicpack.rest.RestfulAPIException;
 import net.technicpack.utilslib.Utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.logging.Level;
 
 public class NewsSelector extends JPanel {
@@ -125,12 +120,7 @@ public class NewsSelector extends JPanel {
         }
 
         news.getArticles().sort((o1, o2) -> {
-            if (o1.getDate().getTime() > o2.getDate().getTime())
-                return -1;
-            else if (o1.getDate().getTime() < o2.getDate().getTime())
-                return 1;
-            else
-                return 0;
+            return Long.compare(o2.getDate().getTime(), o1.getDate().getTime());
         });
 
         widgetHost.removeAll();

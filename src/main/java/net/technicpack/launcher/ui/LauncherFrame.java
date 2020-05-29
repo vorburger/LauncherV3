@@ -318,7 +318,7 @@ public class LauncherFrame extends DraggableFrame implements IRelocalizableResou
 
     public void launchCompleted() {
         if (installer.isCurrentlyRunning()) {
-            EventQueue.invokeLater(() -> launchCompleted());
+            EventQueue.invokeLater(this::launchCompleted);
             return;
         }
 
@@ -611,7 +611,7 @@ public class LauncherFrame extends DraggableFrame implements IRelocalizableResou
                 setupPlayButtonText(modpackSelector.getSelectedPack(), mojangUser);
 
             modpackSelector.forceRefresh();
-            EventQueue.invokeLater(() -> repaint());
+            EventQueue.invokeLater(this::repaint);
         }
     }
 

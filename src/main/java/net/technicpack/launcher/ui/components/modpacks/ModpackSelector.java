@@ -54,8 +54,6 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -278,7 +276,7 @@ public class ModpackSelector extends TintablePanel implements IModpackContainer,
         if (selectedWidget == null || selectedWidget.getModpack() == null || !allModpacks.containsKey(selectedWidget.getModpack().getName())) {
             java.util.List<ModpackWidget> sortedPacks = new LinkedList<>(allModpacks.values());
             sortedPacks.sort((o1, o2) -> {
-                int priorityCompare = (new Integer(o2.getModpack().getPriority())).compareTo(o1.getModpack().getPriority());
+                int priorityCompare = Integer.compare(o2.getModpack().getPriority(), o1.getModpack().getPriority());
                 if (priorityCompare != 0)
                     return priorityCompare;
                 else if (o1.getModpack().getDisplayName() == null && o2.getModpack().getDisplayName() == null)
@@ -355,7 +353,7 @@ public class ModpackSelector extends TintablePanel implements IModpackContainer,
 
     protected void rebuildUI() {
         if (!EventQueue.isDispatchThread()) {
-            EventQueue.invokeLater(() -> rebuildUI());
+            EventQueue.invokeLater(this::rebuildUI);
             return;
         }
 
@@ -363,7 +361,7 @@ public class ModpackSelector extends TintablePanel implements IModpackContainer,
 
         java.util.List<ModpackWidget> sortedPacks = new LinkedList<>(allModpacks.values());
         sortedPacks.sort((o1, o2) -> {
-            int priorityCompare = (new Integer(o2.getModpack().getPriority())).compareTo(o1.getModpack().getPriority());
+            int priorityCompare = Integer.compare(o2.getModpack().getPriority(), o1.getModpack().getPriority());
             if (priorityCompare != 0)
                 return priorityCompare;
             else if (o1.getModpack().getDisplayName() == null && o2.getModpack().getDisplayName() == null)

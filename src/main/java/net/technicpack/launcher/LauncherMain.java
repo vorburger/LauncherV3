@@ -35,7 +35,6 @@ import net.technicpack.launcher.ui.InstallerFrame;
 import net.technicpack.launcher.ui.components.discover.DiscoverInfoPanel;
 import net.technicpack.launcher.ui.components.modpacks.ModpackSelector;
 import net.technicpack.launchercore.TechnicConstants;
-import net.technicpack.launchercore.auth.IAuthListener;
 import net.technicpack.launchercore.auth.IUserStore;
 import net.technicpack.launchercore.exception.DownloadException;
 import net.technicpack.launchercore.image.face.MinotarFaceImageStore;
@@ -95,7 +94,6 @@ import org.joda.time.DateTime;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;

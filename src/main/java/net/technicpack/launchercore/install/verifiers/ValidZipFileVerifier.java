@@ -21,7 +21,6 @@ package net.technicpack.launchercore.install.verifiers;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 public class ValidZipFileVerifier implements IFileVerifier {

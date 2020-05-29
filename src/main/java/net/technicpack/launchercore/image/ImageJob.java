@@ -90,7 +90,7 @@ public class ImageJob<T> {
                 }
             }
         } else {
-            EventQueue.invokeLater(() -> notifyComplete());
+            EventQueue.invokeLater(this::notifyComplete);
         }
     }
 

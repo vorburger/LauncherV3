@@ -24,7 +24,6 @@ import net.technicpack.launchercore.install.LauncherDirectories;
 import net.technicpack.launchercore.install.tasks.IInstallTask;
 
 import java.io.File;
-import java.io.IOException;
 
 public class EnsureUpdateFolders implements IInstallTask {
     private final String taskDescription;

@@ -25,7 +25,6 @@ import net.technicpack.launchercore.install.verifiers.IFileVerifier;
 import net.technicpack.utilslib.IZipFileFilter;
 
 import java.io.File;
-import java.io.IOException;
 
 public class EnsureFileTask<TaskQueue extends ITasksQueue> implements IInstallTask {
     private final File cacheLocation;

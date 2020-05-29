@@ -55,7 +55,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.metal.MetalComboBoxUI;
@@ -64,7 +63,6 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Locale;
@@ -312,7 +310,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         final InstallerFrame frame = new InstallerFrame(resources, params, settings, getOwner());
         frame.setVisible(true);
 
-        EventQueue.invokeLater(() -> frame.requestFocus());
+        EventQueue.invokeLater(frame::requestFocus);
 
         this.dispose();
     }

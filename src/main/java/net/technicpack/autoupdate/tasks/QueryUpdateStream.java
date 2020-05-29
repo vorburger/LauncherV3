@@ -96,7 +96,7 @@ public class QueryUpdateStream implements IInstallTask {
                 updateUrl = version.getJarUrl();
 
             downloadTasks.addTask(new DownloadUpdate(updateUrl, relauncher, postDownloadTasks));
-        } catch (RestfulAPIException ex) {
+        } catch (RestfulAPIException ignored) {
         }
     }
 }
