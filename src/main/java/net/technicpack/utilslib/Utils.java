@@ -23,7 +23,6 @@ import com.google.gson.GsonBuilder;
 import net.technicpack.launchercore.TechnicConstants;
 import net.technicpack.launchercore.exception.DownloadException;
 import net.technicpack.launchercore.mirror.MirrorStore;
-import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -85,7 +84,7 @@ public class Utils {
             //System.out.println(responseCode + " " + urlLoc);
             if (responseFamily == 3) {
                 String newUrl = conn.getHeaderField("Location");
-                URL redirectUrl = null;
+                URL redirectUrl;
                 try {
                     redirectUrl = new URL(newUrl);
                 } catch (MalformedURLException ex) {
@@ -131,7 +130,7 @@ public class Utils {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
 
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
@@ -161,17 +160,14 @@ public class Utils {
             Process process = pb.start();
             final StringBuilder response=new StringBuilder();
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try (final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-                        String line;
-                        while ((line = bufferedReader.readLine()) != null) {
-                            response.append(line + "\n");
-                        }
-                    } catch (IOException ex) {
-                        //Don't let other process' problems concern us
+            new Thread(() -> {
+                try (final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        response.append(line + "\n");
                     }
+                } catch (IOException ex) {
+                    //Don't let other process' problems concern us
                 }
             }).start();
             process.waitFor();
@@ -181,14 +177,14 @@ public class Utils {
                 out = response.toString().trim();
             }
         }
-        catch (IOException e) {
-            //Some kind of problem running java -version or getting output, just assume the version is bad
-            return null;
-        } catch (InterruptedException ex) {
-            //Something booted us while we were waiting on java -version to complete, just assume
-            //this version is bad
+        catch (IOException | InterruptedException e) {
+            // IOException: Some kind of problem running java -version or getting output, just assume the version is bad
+
+            // InterruptedException: Something booted us while we were waiting on java -version to complete, just assume
+            // this version is bad
             return null;
         }
+
         return out;
     }
 }

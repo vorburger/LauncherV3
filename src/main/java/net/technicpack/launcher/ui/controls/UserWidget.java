@@ -33,7 +33,7 @@ import java.awt.image.BufferedImage;
 
 public class UserWidget extends JPanel implements IImageJobListener<MojangUser> {
 
-    private ImageRepository<IUserType> skinRepository;
+    private final ImageRepository<IUserType> skinRepository;
 
     private JLabel userName;
     private JLabel avatar;
@@ -56,7 +56,7 @@ public class UserWidget extends JPanel implements IImageJobListener<MojangUser> 
 
         int endPreText = fullText.indexOf("{0}");
         int startPostText = endPreText + 3;
-        String preText = "";
+        String preText;
         String postText = "";
 
         if (endPreText < 0) {

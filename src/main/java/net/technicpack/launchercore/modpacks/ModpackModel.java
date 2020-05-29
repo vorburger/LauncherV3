@@ -45,7 +45,7 @@ public class ModpackModel {
     private PackInfo packInfo;
     private IInstalledPackRepository installedPackRepository;
     private LauncherDirectories directories;
-    private Collection<String> tags = new ArrayList<String>();
+    private final Collection<String> tags = new ArrayList<>();
 
     private String buildName;
     private boolean isPlatform;
@@ -149,7 +149,7 @@ public class ModpackModel {
         if (packInfo != null && packInfo.getBuilds() != null)
             return packInfo.getBuilds();
 
-        List<String> oneBuild = new ArrayList<String>(1);
+        List<String> oneBuild = new ArrayList<>(1);
 
         Version version = getInstalledVersion();
 
@@ -203,7 +203,7 @@ public class ModpackModel {
 
     public ArrayList<FeedItem> getFeed() {
         if (packInfo == null)
-            return new ArrayList<FeedItem>();
+            return new ArrayList<>();
 
         return packInfo.getFeed();
     }
@@ -298,14 +298,14 @@ public class ModpackModel {
         if (!runDataFile.exists())
             return null;
 
-        String runData = "{}";
+        String runData;
         try {
             runData = FileUtils.readFileToString(runDataFile, StandardCharsets.UTF_8);
         } catch (IOException ex) {
             return null;
         }
 
-        return (RunData)Utils.getGson().fromJson(runData, RunData.class);
+        return Utils.getGson().fromJson(runData, RunData.class);
     }
 
     public File getInstalledDirectory() {

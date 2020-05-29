@@ -34,15 +34,14 @@ public class DesktopUtils {
                 Desktop.getDesktop().mail(new URI(url));
             else
                 Desktop.getDesktop().browse(new URI(url));
-        } catch (IOException ex) {
-            //Thrown by Desktop.browse() - just log & ignore
-            Utils.getLogger().log(Level.SEVERE, ex.getMessage(), ex);
-        } catch (URISyntaxException ex) {
-            //If we got a bogus URL from the internet, then this will throw.  Log & Ignore
-            Utils.getLogger().log(Level.SEVERE, ex.getMessage(), ex);
-        } catch (RuntimeException ex) {
-            //browse() throws a bunch of runtime exceptions if you give it bad input
-            //WHICH IS AWESOME
+        } catch (IOException | RuntimeException | URISyntaxException ex) {
+            // IOException: Thrown by Desktop.browse() - just log & ignore
+
+            // URISyntaxException: If we got a bogus URL from the internet, then this will throw.  Log & Ignore
+
+            // RuntimeException: browse() throws a bunch of runtime exceptions if you give it bad input
+            // WHICH IS AWESOME
+
             Utils.getLogger().log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
@@ -50,7 +49,7 @@ public class DesktopUtils {
     public static void open(final File file) {
         new SwingWorker<Void, Void>() {
             @Override
-            protected Void doInBackground() throws Exception {
+            protected Void doInBackground() {
                 Utils.getLogger().info("Attempting to open "+file.getAbsolutePath());
                 String asciiUri = file.toURI().toASCIIString();
                 Utils.getLogger().info("Using "+asciiUri);

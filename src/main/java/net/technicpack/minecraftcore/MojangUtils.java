@@ -124,7 +124,7 @@ public class MojangUtils {
                 //create a new entry to avoid ZipException: invalid entry compressed size
                 jos.putNextEntry(new JarEntry(entry.getName()));
                 byte[] buffer = new byte[4096];
-                int bytesRead = 0;
+                int bytesRead;
                 while ((bytesRead = is.read(buffer)) != -1) {
                     jos.write(buffer, 0, bytesRead);
                 }

@@ -32,17 +32,16 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
 public class ModpackCachePlatformApi implements IPlatformApi {
 
-    private IPlatformApi innerApi;
-    private Cache<String, PlatformPackInfo> cache;
-    private Cache<String, Boolean> deadPacks;
-    private Cache<String, PlatformPackInfo> foreverCache;
-    private LauncherDirectories directories;
+    private final IPlatformApi innerApi;
+    private final Cache<String, PlatformPackInfo> cache;
+    private final Cache<String, Boolean> deadPacks;
+    private final Cache<String, PlatformPackInfo> foreverCache;
+    private final LauncherDirectories directories;
 
     public ModpackCachePlatformApi(IPlatformApi innerApi, int cacheInSeconds, LauncherDirectories directories) {
         this.innerApi = innerApi;
@@ -85,7 +84,7 @@ public class ModpackCachePlatformApi implements IPlatformApi {
     }
 
     @Override
-    public PlatformPackInfo getPlatformPackInfo(String packSlug) throws RestfulAPIException {
+    public PlatformPackInfo getPlatformPackInfo(String packSlug) {
         PlatformPackInfo info = cache.getIfPresent(packSlug);
 
         if (info == null && isDead(packSlug))
@@ -120,7 +119,7 @@ public class ModpackCachePlatformApi implements IPlatformApi {
     private boolean isDead(String packSlug) {
         Boolean isDead = deadPacks.getIfPresent(packSlug);
 
-        if (isDead != null && isDead.booleanValue())
+        if (isDead != null && isDead)
             return true;
 
         return false;
@@ -157,9 +156,7 @@ public class ModpackCachePlatformApi implements IPlatformApi {
             }
 
             return info;
-        } catch (IOException ex) {
-            return null;
-        } catch (JsonSyntaxException ex) {
+        } catch (IOException | JsonSyntaxException ex) {
             return null;
         }
     }
@@ -172,7 +169,6 @@ public class ModpackCachePlatformApi implements IPlatformApi {
         try {
             FileUtils.writeStringToFile(cacheFile, packCache, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            return;
         }
     }
 
