@@ -33,7 +33,7 @@ import java.awt.event.*;
  */
 public class ConsoleFrame extends JFrame implements MouseListener {
     private static final long serialVersionUID = 1L;
-    private static String[] monospaceFontNames = {"Consolas", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Lucida Console"};
+    private static final String[] monospaceFontNames = {"Consolas", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Lucida Console"};
     private final SimpleAttributeSet highlightedAttributes;
     private final SimpleAttributeSet errorAttributes;
     private final SimpleAttributeSet infoAttributes;
@@ -41,7 +41,7 @@ public class ConsoleFrame extends JFrame implements MouseListener {
     private final SimpleAttributeSet defaultAttributes = new SimpleAttributeSet();
     private JTextComponent textComponent;
     private Document document;
-    private int numLines;
+    private final int numLines;
 
     /**
      * Construct the frame.
@@ -151,27 +151,17 @@ public class ConsoleFrame extends JFrame implements MouseListener {
 
     private class ContextMenu extends JPopupMenu {
         private static final long serialVersionUID = 1L;
-        JMenuItem copy;
-        JMenuItem clear;
+        final JMenuItem copy;
+        final JMenuItem clear;
 
         public ContextMenu() {
             copy = new JMenuItem("Copy");
             add(copy);
-            copy.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    textComponent.copy();
-                }
-            });
+            copy.addActionListener(e -> textComponent.copy());
 
             clear = new JMenuItem("Clear");
             add(clear);
-            clear.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    textComponent.setText("");
-                }
-            });
+            clear.addActionListener(e -> textComponent.setText(""));
         }
     }
 }

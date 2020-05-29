@@ -28,11 +28,11 @@ import net.technicpack.solder.io.SolderPackInfo;
 
 public class HttpSolderPackApi implements ISolderPackApi {
 
-    private String baseUrl;
-    private String modpackSlug;
-    private String clientId;
-    private String userDisplayName;
-    private String mirrorUrl;
+    private final String baseUrl;
+    private final String modpackSlug;
+    private final String clientId;
+    private final String userDisplayName;
+    private final String mirrorUrl;
 
     protected HttpSolderPackApi(String baseUrl, String modpackSlug, String clientId, String userDisplayName, String mirrorUrl) throws RestfulAPIException {
         this.baseUrl = baseUrl;

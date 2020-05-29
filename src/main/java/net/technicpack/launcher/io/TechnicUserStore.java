@@ -27,7 +27,6 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.HashMap;
@@ -36,8 +35,8 @@ import java.util.UUID;
 import java.util.logging.Level;
 
 public class TechnicUserStore implements IUserStore<MojangUser> {
-    private String clientToken = UUID.randomUUID().toString();
-    private Map<String, MojangUser> savedUsers = new HashMap<String, MojangUser>();
+    private final String clientToken = UUID.randomUUID().toString();
+    private final Map<String, MojangUser> savedUsers = new HashMap<>();
     private String lastUser;
     private transient File usersFile;
 
@@ -62,9 +61,7 @@ public class TechnicUserStore implements IUserStore<MojangUser> {
                 newModel.setUserFile(userFile);
                 return newModel;
             }
-        } catch (JsonSyntaxException e) {
-            Utils.getLogger().log(Level.WARNING, "Unable to load users from " + userFile);
-        } catch (IOException e) {
+        } catch (JsonSyntaxException | IOException e) {
             Utils.getLogger().log(Level.WARNING, "Unable to load users from " + userFile);
         }
 

@@ -26,10 +26,10 @@ import net.technicpack.launchercore.mirror.secure.rest.ISecureMirror;
 import java.util.Date;
 
 public class SecureToken {
-    private String token;
-    private Date receivedTime;
-    private UserModel userModel;
-    private ISecureMirror mirror;
+    private final String token;
+    private final Date receivedTime;
+    private final UserModel userModel;
+    private final ISecureMirror mirror;
 
     private String tokenUserName;
     private String tokenAccessToken;
@@ -45,7 +45,7 @@ public class SecureToken {
         return mirror.getDownloadHost();
     }
 
-    public String queryForSecureToken() throws DownloadException {
+    public String queryForSecureToken() {
         return null;
     }
 }

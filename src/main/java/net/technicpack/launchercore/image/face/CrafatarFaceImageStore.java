@@ -29,8 +29,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 public class CrafatarFaceImageStore implements IImageStore<IUserType> {
-    private String mBaseUrl;
-    private MirrorStore mirrorStore;
+    private final String mBaseUrl;
+    private final MirrorStore mirrorStore;
 
     public CrafatarFaceImageStore(String baseUrl, MirrorStore mirrorStore) {
         mBaseUrl = baseUrl;

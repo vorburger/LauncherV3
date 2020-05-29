@@ -25,7 +25,7 @@ import net.technicpack.rest.RestObject;
 import net.technicpack.rest.RestfulAPIException;
 
 public class HttpUpdateStream implements IUpdateStream {
-    private String baseUrl;
+    private final String baseUrl;
 
     public HttpUpdateStream(String baseUrl) {
         this.baseUrl = baseUrl;

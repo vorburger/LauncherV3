@@ -9,9 +9,9 @@ import java.util.concurrent.TimeUnit;
 
 public class CacheDiscordApi implements IDiscordApi {
 
-    private IDiscordApi innerApi;
-    private Cache<String, Server> cache;
-    private Cache<String, Boolean> deadCache;
+    private final IDiscordApi innerApi;
+    private final Cache<String, Server> cache;
+    private final Cache<String, Boolean> deadCache;
 
     public CacheDiscordApi(IDiscordApi innerApi, int cacheLength, int deadCacheLength) {
         this.innerApi = innerApi;
@@ -48,18 +48,15 @@ public class CacheDiscordApi implements IDiscordApi {
         //before the first one comes back.  The response will sort out the "correct" value for the
         //dead cache.
         deadCache.put(serverId, true);
-        this.innerApi.retrieveServer(modpack, serverId, new IDiscordCallback() {
-            @Override
-            public void serverGetCallback(ModpackModel pack, Server server) {
-                if (server == null)
-                    deadCache.put(serverId, true);
-                else {
-                    deadCache.put(serverId, false);
-                    cache.put(serverId, server);
-                }
-
-                callback.serverGetCallback(pack, server);
+        this.innerApi.retrieveServer(modpack, serverId, (pack, server) -> {
+            if (server == null)
+                deadCache.put(serverId, true);
+            else {
+                deadCache.put(serverId, false);
+                cache.put(serverId, server);
             }
+
+            callback.serverGetCallback(pack, server);
         });
     }
 }

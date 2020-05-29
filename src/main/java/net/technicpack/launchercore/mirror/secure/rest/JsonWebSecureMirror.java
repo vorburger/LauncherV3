@@ -26,8 +26,8 @@ import net.technicpack.utilslib.Utils;
 import java.util.logging.Level;
 
 public class JsonWebSecureMirror implements ISecureMirror {
-    private String baseUrl;
-    private String downloadHost;
+    private final String baseUrl;
+    private final String downloadHost;
 
     public JsonWebSecureMirror(String baseUrl, String downloadHost) {
         this.baseUrl = baseUrl;

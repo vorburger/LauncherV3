@@ -35,16 +35,16 @@ import java.util.concurrent.TimeUnit;
 
 public class CachedSolderApi implements ISolderApi {
 
-    private LauncherDirectories directories;
-    private ISolderApi innerApi;
+    private final LauncherDirectories directories;
+    private final ISolderApi innerApi;
     private Collection<SolderPackInfo> cachedPublicPacks = null;
     private DateTime lastSolderPull = new DateTime(0);
-    private int cacheInSeconds;
+    private final int cacheInSeconds;
 
-    private class CacheTuple {
-        private String root;
-        private String slug;
-        private String url;
+    private static class CacheTuple {
+        private final String root;
+        private final String slug;
+        private final String url;
 
         public CacheTuple(String root, String slug, String url) {
             this.root = root;
@@ -79,7 +79,7 @@ public class CachedSolderApi implements ISolderApi {
         }
     }
 
-    private Cache<CacheTuple, ISolderPackApi> packs;
+    private final Cache<CacheTuple, ISolderPackApi> packs;
 
     public CachedSolderApi(LauncherDirectories directories, ISolderApi innerApi, int cacheInSeconds) {
         this.directories = directories;
@@ -119,7 +119,7 @@ public class CachedSolderApi implements ISolderApi {
         }
 
         if (Seconds.secondsBetween(lastSolderPull, DateTime.now()).isLessThan(Seconds.seconds(cacheInSeconds / 10)))
-            return new ArrayList<SolderPackInfo>(0);
+            return new ArrayList<>(0);
 
         try {
             cachedPublicPacks = innerApi.internalGetPublicSolderPacks(solderRoot, this);

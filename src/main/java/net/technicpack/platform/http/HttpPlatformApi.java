@@ -28,9 +28,9 @@ import net.technicpack.rest.RestfulAPIException;
 import net.technicpack.utilslib.Utils;
 
 public class HttpPlatformApi implements IPlatformApi {
-    private String platformUrl;
-    private MirrorStore mirrorStore;
-    private String launcherBuild;
+    private final String platformUrl;
+    private final MirrorStore mirrorStore;
+    private final String launcherBuild;
 
     public HttpPlatformApi(String rootUrl, MirrorStore mirrorStore, String launcherBuild) {
         this.platformUrl = rootUrl;

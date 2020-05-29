@@ -28,7 +28,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 public class XMLUtils {
-    static DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+    static final DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
     static DocumentBuilder docBuilder;
 
     public static Document getXMLFromURL(String url) {

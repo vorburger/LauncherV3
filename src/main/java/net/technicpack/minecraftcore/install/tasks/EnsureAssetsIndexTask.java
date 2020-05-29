@@ -61,7 +61,7 @@ public class EnsureAssetsIndexTask implements IInstallTask {
     }
 
     @Override
-    public void runTask(InstallTasksQueue queue) throws IOException {
+    public void runTask(InstallTasksQueue queue) {
         MojangVersion version = ((InstallTasksQueue<MojangVersion>)queue).getMetadata();
 
         String assetKey = version.getAssetsKey();

@@ -26,10 +26,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class UserModel<UserType extends IUserType> {
-    private UserType mCurrentUser = null;
-    private List<IAuthListener> mAuthListeners = new LinkedList<IAuthListener>();
-    private IUserStore<UserType> mUserStore;
-    private IGameAuthService<UserType> gameAuthService;
+    private UserType mCurrentUser;
+    private final List<IAuthListener> mAuthListeners = new LinkedList<>();
+    private final IUserStore<UserType> mUserStore;
+    private final IGameAuthService<UserType> gameAuthService;
 
     public UserModel(IUserStore userStore, IGameAuthService<UserType> gameAuthService) {
         this.mCurrentUser = null;
@@ -140,9 +140,9 @@ public class UserModel<UserType extends IUserType> {
         return mUserStore.getClientToken();
     }
 
-    public class AuthError {
-        private String mError;
-        private String mErrorDescription;
+    public static class AuthError {
+        private final String mError;
+        private final String mErrorDescription;
 
         public AuthError(String error, String errorDescription) {
             this.mError = error;

@@ -18,12 +18,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class InstallVersionLibTask extends ListenerTask {
-    private Library library;
-    private ITasksQueue grabQueue;
-    private ITasksQueue downloadLibraryQueue;
-    private ITasksQueue copyLibraryQueue;
-    private ModpackModel pack;
-    private LauncherDirectories directories;
+    private final Library library;
+    private final ITasksQueue grabQueue;
+    private final ITasksQueue downloadLibraryQueue;
+    private final ITasksQueue copyLibraryQueue;
+    private final ModpackModel pack;
+    private final LauncherDirectories directories;
 
     public InstallVersionLibTask(Library library, ITasksQueue grabQueue, ITasksQueue downloadLibraryQueue, ITasksQueue copyLibraryQueue, ModpackModel pack, LauncherDirectories directories) {
         this.library = library;

@@ -88,7 +88,7 @@ public class AuthenticationService implements IGameAuthService<MojangUser> {
             try {
                 if (stream != null)
                     stream.close();
-            } catch (IOException e) {}
+            } catch (IOException ignored) {}
         }
 
         return returnable;

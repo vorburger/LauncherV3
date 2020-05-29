@@ -23,7 +23,6 @@ import net.technicpack.launchercore.exception.DownloadException;
 import net.technicpack.launchercore.exception.PermissionDeniedException;
 import net.technicpack.launchercore.util.DownloadListener;
 import net.technicpack.utilslib.Utils;
-import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.net.*;
@@ -36,20 +35,20 @@ import java.util.concurrent.atomic.AtomicReference;
 public class Download implements Runnable {
     private static final long TIMEOUT = 30000;
 
-    private URL url;
+    private final URL url;
     private long size = -1;
     private long downloaded = 0;
-    private String outPath;
-    private String name;
+    private final String outPath;
+    private final String name;
     private DownloadListener listener;
     private Result result = Result.FAILURE;
     private File outFile = null;
     private Exception exception = null;
 
-    private Object timeoutLock = new Object();
+    private final Object timeoutLock = new Object();
     private boolean isTimedOut = false;
 
-    public Download(URL url, String name, String outPath) throws MalformedURLException {
+    public Download(URL url, String name, String outPath) {
         this.url = url;
         this.outPath = outPath;
         this.name = name;
@@ -74,7 +73,7 @@ public class Download implements Runnable {
             if (responseFamily == 3) {
                 String redirUrlText = conn.getHeaderField("Location");
                 if (redirUrlText != null && !redirUrlText.isEmpty()) {
-                    URL redirectUrl = null;
+                    URL redirectUrl;
                     try {
                         redirectUrl = new URL(redirUrlText);
                     } catch (MalformedURLException ex) {
@@ -126,7 +125,6 @@ public class Download implements Runnable {
             }
         } catch (ClosedByInterruptException ex) {
             result = Result.FAILURE;
-            return;
         } catch (PermissionDeniedException e) {
             exception = e;
             result = Result.PERMISSION_DENIED;
@@ -140,7 +138,7 @@ public class Download implements Runnable {
     }
 
     protected InputStream getConnectionInputStream(final URLConnection urlconnection) throws DownloadException {
-        final AtomicReference<InputStream> is = new AtomicReference<InputStream>();
+        final AtomicReference<InputStream> is = new AtomicReference<>();
 
         for (int j = 0; (j < 3) && (is.get() == null); j++) {
             StreamThread stream = new StreamThread(urlconnection, is);

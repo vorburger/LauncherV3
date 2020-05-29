@@ -26,8 +26,8 @@ import java.io.IOException;
 
 public class ChainVersionBuilder implements MojangVersionBuilder {
 
-    private MojangVersionBuilder primaryVersionBuilder;
-    private MojangVersionBuilder chainedVersionBuilder;
+    private final MojangVersionBuilder primaryVersionBuilder;
+    private final MojangVersionBuilder chainedVersionBuilder;
 
     public ChainVersionBuilder(MojangVersionBuilder primaryVersionBuilder, MojangVersionBuilder chainedVersionBuilder) {
         this.primaryVersionBuilder = primaryVersionBuilder;

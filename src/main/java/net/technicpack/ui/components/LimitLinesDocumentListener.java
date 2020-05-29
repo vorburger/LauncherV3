@@ -33,7 +33,7 @@ import javax.swing.text.Element;
  */
 public class LimitLinesDocumentListener implements DocumentListener {
     private int maximumLines;
-    private boolean isRemoveFromStart;
+    private final boolean isRemoveFromStart;
 
     /**
      * Specify the number of lines to be stored in the Document. Extra lines
@@ -66,12 +66,7 @@ public class LimitLinesDocumentListener implements DocumentListener {
     public void insertUpdate(final DocumentEvent e) {
         // Changes to the Document can not be done within the listener
         // so we need to add the processing to the end of the EDT
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                removeLines(e);
-            }
-        });
+        SwingUtilities.invokeLater(() -> removeLines(e));
     }
 
     private void removeLines(DocumentEvent e) {

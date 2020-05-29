@@ -29,7 +29,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 public class WebAvatarImageStore implements IImageStore<AuthorshipInfo> {
-    private MirrorStore mirrorStore;
+    private final MirrorStore mirrorStore;
 
     public WebAvatarImageStore(MirrorStore mirrorStore) {
         this.mirrorStore = mirrorStore;

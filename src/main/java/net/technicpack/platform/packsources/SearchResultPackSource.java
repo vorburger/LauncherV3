@@ -29,9 +29,9 @@ import net.technicpack.rest.io.PackInfo;
 import java.util.*;
 
 public class SearchResultPackSource implements IPackSource {
-    private IPlatformSearchApi platformApi;
-    private String searchTerms;
-    private Map<String, Integer> resultPriorities = new HashMap<String, Integer>();
+    private final IPlatformSearchApi platformApi;
+    private final String searchTerms;
+    private final Map<String, Integer> resultPriorities = new HashMap<>();
 
     public SearchResultPackSource(IPlatformSearchApi platformApi, String searchTerms) {
         this.platformApi = platformApi;
@@ -48,14 +48,14 @@ public class SearchResultPackSource implements IPackSource {
     public Collection<PackInfo> getPublicPacks() {
         resultPriorities.clear();
         //Get results from server
-        SearchResultsData results = null;
+        SearchResultsData results;
         try {
             results = platformApi.getSearchResults(searchTerms);
         } catch (RestfulAPIException ex) {
             return Collections.emptySet();
         }
 
-        ArrayList<PackInfo> resultPacks = new ArrayList<PackInfo>(results.getResults().length);
+        ArrayList<PackInfo> resultPacks = new ArrayList<>(results.getResults().length);
 
         int priority = 100;
         for (SearchResult result : results.getResults()) {

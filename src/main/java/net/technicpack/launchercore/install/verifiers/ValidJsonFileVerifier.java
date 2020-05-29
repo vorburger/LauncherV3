@@ -25,12 +25,11 @@ import net.technicpack.utilslib.Utils;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 
 public class ValidJsonFileVerifier implements IFileVerifier {
-    private Gson validatingGson;
+    private final Gson validatingGson;
 
     public ValidJsonFileVerifier(Gson validatingGson) {
         this.validatingGson = validatingGson;

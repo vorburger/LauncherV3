@@ -39,12 +39,12 @@ import java.util.Collection;
 
 public class QueryUpdateStream implements IInstallTask {
 
-    private String description;
-    private ITasksQueue downloadTasks;
-    private IUpdateStream updateStream;
-    private LauncherDirectories directories;
-    private Relauncher relauncher;
-    private Collection<IInstallTask> postDownloadTasks;
+    private final String description;
+    private final ITasksQueue downloadTasks;
+    private final IUpdateStream updateStream;
+    private final LauncherDirectories directories;
+    private final Relauncher relauncher;
+    private final Collection<IInstallTask> postDownloadTasks;
 
     public QueryUpdateStream(String description, IUpdateStream stream, ITasksQueue downloadTasks, LauncherDirectories directories, Relauncher relauncher, Collection<IInstallTask> postDownloadTasks) {
         this.description = description;
@@ -66,7 +66,7 @@ public class QueryUpdateStream implements IInstallTask {
     }
 
     @Override
-    public void runTask(InstallTasksQueue queue) throws IOException, InterruptedException {
+    public void runTask(InstallTasksQueue queue) throws IOException {
         try {
             StreamVersion version = updateStream.getStreamVersion(relauncher.getStreamName());
 
@@ -83,7 +83,7 @@ public class QueryUpdateStream implements IInstallTask {
             if (version.getBuild() == relauncher.getCurrentBuild() || (relauncher.getStreamName().startsWith("beta") && version.getBuild() <= relauncher.getCurrentBuild()))
                 return;
 
-            String updateUrl = null;
+            String updateUrl;
             String runningPath = relauncher.getRunningPath();
 
             if (runningPath == null) {
@@ -97,7 +97,6 @@ public class QueryUpdateStream implements IInstallTask {
 
             downloadTasks.addTask(new DownloadUpdate(updateUrl, relauncher, postDownloadTasks));
         } catch (RestfulAPIException ex) {
-            return;
         }
     }
 }

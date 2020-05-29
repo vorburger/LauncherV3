@@ -61,7 +61,7 @@ public class Memory {
             if (osInfo instanceof com.sun.management.OperatingSystemMXBean) {
                 maxMemory = ((com.sun.management.OperatingSystemMXBean) osInfo).getTotalPhysicalMemorySize() / 1024 / 1024;
             }
-        } catch (Throwable t) {
+        } catch (Throwable ignored) {
         }
         return Math.max(512, maxMemory);
     }
@@ -95,9 +95,9 @@ public class Memory {
         return bestMemory;
     }
 
-    long memory;
-    String text;
-    int option;
+    final long memory;
+    final String text;
+    final int option;
 
     private Memory(int memory, String text, int option) {
         this.memory = memory;

@@ -33,7 +33,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class InitialV3Migrator implements IMigrator {
-    private IPlatformApi platformApi;
+    private final IPlatformApi platformApi;
 
     public InitialV3Migrator(IPlatformApi platformApi) {
         this.platformApi = platformApi;
@@ -67,7 +67,7 @@ public class InitialV3Migrator implements IMigrator {
             //Just kill the exception & go with ID 0
         }
 
-        List<ModpackModel> deletePacks = new LinkedList<ModpackModel>();
+        List<ModpackModel> deletePacks = new LinkedList<>();
         for (String packName : packStore.getPackNames()) {
             InstalledPack pack = packStore.getInstalledPacks().get(packName);
             ModpackModel model = new ModpackModel(pack, null, packStore, directories);

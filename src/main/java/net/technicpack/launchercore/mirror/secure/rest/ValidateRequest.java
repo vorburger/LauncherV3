@@ -22,8 +22,8 @@ package net.technicpack.launchercore.mirror.secure.rest;
 import net.technicpack.rest.RestObject;
 
 public class ValidateRequest extends RestObject {
-    private String accessToken;
-    private String clientToken;
+    private final String accessToken;
+    private final String clientToken;
 
     public ValidateRequest(String clientToken, String accessToken) {
         this.clientToken = clientToken;

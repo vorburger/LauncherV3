@@ -111,7 +111,7 @@ public class Installer {
             boolean everythingWorked = false;
 
             try {
-                MojangVersion version = null;
+                MojangVersion version;
 
                 InstallTasksQueue<MojangVersion> tasksQueue = new InstallTasksQueue<>(listener, mirrorStore);
                 MojangVersionBuilder versionBuilder = createVersionBuilder(pack, tasksQueue);

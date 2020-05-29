@@ -25,7 +25,7 @@ public class AuthenticationNetworkFailureException extends IOException {
     private Throwable cause;
     private static final long serialVersionUID = 5887385045789342851L;
 
-    private String targetSite;
+    private final String targetSite;
 
     public AuthenticationNetworkFailureException(String targetSite) {
         this.targetSite = targetSite;

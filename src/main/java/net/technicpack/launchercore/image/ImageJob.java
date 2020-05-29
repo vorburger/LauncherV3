@@ -29,21 +29,21 @@ import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ImageJob<T> {
-    protected IImageMapper<T> mapper;
-    protected IImageStore<T> store;
+    protected final IImageMapper<T> mapper;
+    protected final IImageStore<T> store;
 
     private T lastJobData;
 
     protected boolean canRetry = true;
-    private AtomicReference<BufferedImage> imageReference;
+    private final AtomicReference<BufferedImage> imageReference;
 
-    private Collection<IImageJobListener<T>> jobListeners = new LinkedList<IImageJobListener<T>>();
+    private final Collection<IImageJobListener<T>> jobListeners = new LinkedList<>();
 
     public ImageJob(IImageMapper<T> mapper, IImageStore<T> store) {
         this.mapper = mapper;
         this.store = store;
 
-        imageReference = new AtomicReference<BufferedImage>();
+        imageReference = new AtomicReference<>();
         imageReference.set(mapper.getDefaultImage());
     }
 
@@ -90,12 +90,7 @@ public class ImageJob<T> {
                 }
             }
         } else {
-            EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    notifyComplete();
-                }
-            });
+            EventQueue.invokeLater(() -> notifyComplete());
         }
     }
 

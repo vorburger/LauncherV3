@@ -25,7 +25,7 @@ import java.awt.*;
 
 public class TooltipWarning extends JLabel {
 
-    private JToolTip toolTip;
+    private final JToolTip toolTip;
 
     public TooltipWarning(Icon icon, JToolTip toolTip) {
         super(icon);
@@ -50,7 +50,7 @@ public class TooltipWarning extends JLabel {
         }
     }
 
-    private class WarningTooltipUI extends MetalToolTipUI {
+    private static class WarningTooltipUI extends MetalToolTipUI {
 
         @Override
         public void paint(Graphics g, JComponent c) {
@@ -88,7 +88,7 @@ public class TooltipWarning extends JLabel {
             int nIndex = 0;
             int startX = 4;
             int startY = 3;
-            int lineSize = (int)tooltip.getFontMetrics(tooltip.getFont()).getHeight();
+            int lineSize = tooltip.getFontMetrics(tooltip.getFont()).getHeight();
 
             while ( nIndex < arr.length )
             {
@@ -96,12 +96,12 @@ public class TooltipWarning extends JLabel {
 
                 int nextEndY = nextStartY + lineSize;
 
-                String line = arr[nIndex++];
-                int lineWidth = tooltip.getFontMetrics(tooltip.getFont()).stringWidth(line);
+                StringBuilder line = new StringBuilder(arr[nIndex++]);
+                int lineWidth = tooltip.getFontMetrics(tooltip.getFont()).stringWidth(line.toString());
 
                 while ( ( nIndex < arr.length ) && (lineWidth < 243) )
                 {
-                    line = line + " " + arr[nIndex];
+                    line.append(" ").append(arr[nIndex]);
                     nIndex++;
 
                     if (nIndex == arr.length)
@@ -118,12 +118,11 @@ public class TooltipWarning extends JLabel {
         private void drawTextUgly(String text, Graphics2D g2)
         {
             // Ugly code to wrap text
-            String textToDraw = text;
-            String[] arr = textToDraw.split(" ");
+            String[] arr = text.split(" ");
             int nIndex = 0;
             int startX = 4;
             int startY = 3;
-            int lineSize = (int)g2.getFontMetrics().getHeight();
+            int lineSize = g2.getFontMetrics().getHeight();
 
             while ( nIndex < arr.length )
             {
@@ -131,12 +130,12 @@ public class TooltipWarning extends JLabel {
 
                 int nextEndY = nextStartY + lineSize;
 
-                String line = arr[nIndex++];
-                int lineWidth = g2.getFontMetrics().stringWidth(line);
+                StringBuilder line = new StringBuilder(arr[nIndex++]);
+                int lineWidth = g2.getFontMetrics().stringWidth(line.toString());
 
                 while ( ( nIndex < arr.length ) && (lineWidth < 243) )
                 {
-                    line = line + " " + arr[nIndex];
+                    line.append(" ").append(arr[nIndex]);
                     nIndex++;
 
                     if (nIndex == arr.length)
@@ -145,7 +144,7 @@ public class TooltipWarning extends JLabel {
                     lineWidth = g2.getFontMetrics().stringWidth(line+" "+arr[nIndex]);
                 }
 
-                g2.drawString(line, startX, startY + g2.getFontMetrics().getAscent());
+                g2.drawString(line.toString(), startX, startY + g2.getFontMetrics().getAscent());
                 startY = nextStartY;
             }
         }

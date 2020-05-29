@@ -8,8 +8,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 public class NameFilterPackSource implements IPackSource {
-    private MemoryModpackContainer baseModpacks;
-    private String filterTerms;
+    private final MemoryModpackContainer baseModpacks;
+    private final String filterTerms;
 
     public NameFilterPackSource(MemoryModpackContainer modpacks, String filter) {
         this.baseModpacks = modpacks;
@@ -23,7 +23,7 @@ public class NameFilterPackSource implements IPackSource {
 
     @Override
     public Collection<PackInfo> getPublicPacks() {
-        LinkedList<PackInfo> info = new LinkedList<PackInfo>();
+        LinkedList<PackInfo> info = new LinkedList<>();
 
         for (ModpackModel modpack : baseModpacks.getModpacks()) {
             if (modpack.getDisplayName().toUpperCase().contains(filterTerms)) {

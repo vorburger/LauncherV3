@@ -30,8 +30,8 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 
 public class SolderPackSource implements IPackSource {
-    private String baseUrl;
-    private ISolderApi solder;
+    private final String baseUrl;
+    private final ISolderApi solder;
 
     public SolderPackSource(String baseUrl, ISolderApi solder) {
         this.baseUrl = baseUrl;
@@ -45,7 +45,7 @@ public class SolderPackSource implements IPackSource {
 
     @Override
     public Collection<PackInfo> getPublicPacks() {
-        LinkedList<PackInfo> returnValue = new LinkedList<PackInfo>();
+        LinkedList<PackInfo> returnValue = new LinkedList<>();
 
         try {
             Collection<SolderPackInfo> packs = solder.getPublicSolderPacks(baseUrl);

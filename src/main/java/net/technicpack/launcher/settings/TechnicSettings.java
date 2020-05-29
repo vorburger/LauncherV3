@@ -26,7 +26,6 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -42,7 +41,7 @@ public class TechnicSettings implements ILaunchOptions {
     private String buildStream = STABLE;
     private boolean showConsole;
     private String languageCode = "default";
-    private String clientId = UUID.randomUUID().toString();
+    private final String clientId = UUID.randomUUID().toString();
     private String directory;
     private String javaArgs;
     private int latestNewsArticle;

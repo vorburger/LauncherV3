@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class DeleteFileTask implements IInstallTask {
-    private File fileToDelete;
+    private final File fileToDelete;
 
     public DeleteFileTask(File fileToDelete) {
         this.fileToDelete = fileToDelete;
@@ -24,7 +24,7 @@ public class DeleteFileTask implements IInstallTask {
     }
 
     @Override
-    public void runTask(InstallTasksQueue queue) throws IOException, InterruptedException {
+    public void runTask(InstallTasksQueue queue) {
         if (fileToDelete.exists()) {
             try {
                 FileUtils.forceDelete(fileToDelete);

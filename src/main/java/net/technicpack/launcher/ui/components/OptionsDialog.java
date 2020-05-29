@@ -74,7 +74,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
     private static final int DIALOG_WIDTH = 830;
     private static final int DIALOG_HEIGHT = 564;
 
-    private TechnicSettings settings;
+    private final TechnicSettings settings;
 
     private boolean hasShownStreamInfo = false;
     private ResourceLoader resources;
@@ -82,7 +82,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
     private final FileJavaSource fileJavaSource;
     private final IBuildNumber buildNumber;
 
-    private DocumentListener javaArgsListener = new DocumentListener() {
+    private final DocumentListener javaArgsListener = new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
             changeJavaArgs();
@@ -99,7 +99,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         }
     };
 
-    private DocumentListener dimensionListener = new DocumentListener() {
+    private final DocumentListener dimensionListener = new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent e) {
             changeWindowDimensions();
@@ -126,7 +126,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
     JTextField clientId;
     JCheckBox showConsole;
     JCheckBox launchToModpacks;
-    StartupParameters params;
+    final StartupParameters params;
     Component ramWarning;
     JCheckBox askFirstBox;
     JComboBox useStencil;
@@ -312,12 +312,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         final InstallerFrame frame = new InstallerFrame(resources, params, settings, getOwner());
         frame.setVisible(true);
 
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                frame.requestFocus();
-            }
-        });
+        EventQueue.invokeLater(() -> frame.requestFocus());
 
         this.dispose();
     }
@@ -338,32 +333,17 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         for (ActionListener listener : showConsole.getActionListeners())
             showConsole.removeActionListener(listener);
         showConsole.setSelected(settings.getShowConsole());
-        showConsole.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeShowConsole();
-            }
-        });
+        showConsole.addActionListener(e -> changeShowConsole());
 
         for (ActionListener listener : askFirstBox.getActionListeners())
             askFirstBox.removeActionListener(listener);
         askFirstBox.setSelected(!settings.shouldAutoAcceptModpackRequirements());
-        askFirstBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeAskFirst();
-            }
-        });
+        askFirstBox.addActionListener(e -> changeAskFirst());
 
         for (ActionListener listener : launchToModpacks.getActionListeners())
             launchToModpacks.removeActionListener(listener);
         launchToModpacks.setSelected(settings.getLaunchToModpacks());
-        launchToModpacks.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeLaunchToModpacks();
-            }
-        });
+        launchToModpacks.addActionListener(e -> changeLaunchToModpacks());
 
         for (ActionListener listener : versionSelect.getActionListeners())
             versionSelect.removeActionListener(listener);
@@ -394,12 +374,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
             }
         }
 
-        versionSelect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeJavaVersion();
-            }
-        });
+        versionSelect.addActionListener(e -> changeJavaVersion());
 
         rebuildMemoryList();
 
@@ -410,12 +385,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         streamSelect.addItem(new StreamItem(resources.getString("launcheroptions.build.stable"), "stable"));
         streamSelect.addItem(new StreamItem(resources.getString("launcheroptions.build.beta"), "beta"));
         streamSelect.setSelectedIndex((settings.getBuildStream().equals("beta"))?1:0);
-        streamSelect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeStream();
-            }
-        });
+        streamSelect.addActionListener(e -> changeStream());
 
         for (ActionListener listener : launchSelect.getActionListeners())
             launchSelect.removeActionListener(listener);
@@ -425,24 +395,17 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         launchSelect.addItem(new OnLaunchItem(resources.getString("launcheroptions.packlaunch.nothing"), LaunchAction.NOTHING));
 
         switch (settings.getLaunchAction()) {
-            case HIDE:
-                launchSelect.setSelectedIndex(0);
-                break;
             case CLOSE:
                 launchSelect.setSelectedIndex(1);
                 break;
             case NOTHING:
                 launchSelect.setSelectedIndex(2);
                 break;
+            case HIDE:
             default:
                 launchSelect.setSelectedIndex(0);
         }
-        launchSelect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeLaunchAction();
-            }
-        });
+        launchSelect.addActionListener(e -> changeLaunchAction());
 
         for (ActionListener listener : langSelect.getActionListeners())
             langSelect.removeActionListener(listener);
@@ -468,12 +431,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
                 }
             }
         }
-        langSelect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeLanguage();
-            }
-        });
+        langSelect.addActionListener(e -> changeLanguage());
 
         widthInput.getDocument().removeDocumentListener(dimensionListener);
         heightInput.getDocument().removeDocumentListener(dimensionListener);
@@ -505,12 +463,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
                 windowSelect.setSelectedIndex(2);
                 break;
         }
-        windowSelect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeWindowType();
-            }
-        });
+        windowSelect.addActionListener(e -> changeWindowType());
         updateDimensionsEnabled();
 
         for (ActionListener listener : useStencil.getActionListeners()) {
@@ -523,12 +476,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
             useStencil.setSelectedIndex(0);
         else
             useStencil.setSelectedIndex(1);
-        useStencil.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeEnableStencil();
-            }
-        });
+        useStencil.addActionListener(e -> changeEnableStencil());
     }
 
     private void rebuildMemoryList() {
@@ -561,12 +509,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
             settings.save();
         }
         memSelect.setSelectedItem(availableMem);
-        memSelect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeMemory();
-            }
-        });
+        memSelect.addActionListener(e -> changeMemory());
 
         if (parent != null) {
             boolean is64Bit = true;
@@ -591,8 +534,8 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
                 toolTip.setFont(resources.getFont(ResourceLoader.FONT_OPENSANS, 14));
 
 
-                String text = null;
-                Icon icon = null;
+                String text;
+                Icon icon;
 
                 if (has64Bit) {
                     text = resources.getString("launcheroptions.java.use64bit");
@@ -636,12 +579,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         closeButton.setContentAreaFilled(false);
         closeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         closeButton.setFocusPainted(false);
-        closeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                closeDialog();
-            }
-        });
+        closeButton.addActionListener(e -> closeDialog());
         header.add(closeButton);
 
         SimpleTabPane centerPanel = new SimpleTabPane();
@@ -694,12 +632,9 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         textPane.setHighlighter(null);
         textPane.setAlignmentX(LEFT_ALIGNMENT);
         textPane.setContentType("text/html");
-        textPane.addHyperlinkListener(new HyperlinkListener() {
-            @Override
-            public void hyperlinkUpdate(HyperlinkEvent e) {
-                if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED)
-                    DesktopUtils.browseUrl(e.getURL().toString());
-            }
+        textPane.addHyperlinkListener(e -> {
+            if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED)
+                DesktopUtils.browseUrl(e.getURL().toString());
         });
         MutableAttributeSet attributes = new SimpleAttributeSet(textPane.getParagraphAttributes());
         StyleConstants.setLineSpacing(attributes, StyleConstants.getLineSpacing(attributes) * 1.3f);
@@ -827,12 +762,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         reinstallButton.setContentAreaFilled(false);
         reinstallButton.setForeground(LauncherFrame.COLOR_BUTTON_BLUE);
         reinstallButton.setHoverForeground(LauncherFrame.COLOR_BLUE);
-        reinstallButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                reinstall();
-            }
-        });
+        reinstallButton.addActionListener(e -> reinstall());
         panel.add(reinstallButton, new GridBagConstraints(3, 3, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(8, 0, 8, 0), 0, 0));
 
         //Client ID field
@@ -856,12 +786,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         copyButton.setContentAreaFilled(false);
         copyButton.setForeground(LauncherFrame.COLOR_BUTTON_BLUE);
         copyButton.setHoverForeground(LauncherFrame.COLOR_BLUE);
-        copyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                copyCid();
-            }
-        });
+        copyButton.addActionListener(e -> copyCid());
         panel.add(copyButton, new GridBagConstraints(3, 4, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(8, 0, 8, 0), 0, 0));
 
         panel.add(Box.createRigidArea(new Dimension(60, 0)), new GridBagConstraints(4, 3, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0,0,0,0), 0,0));
@@ -909,12 +834,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         openLogs.setForeground(LauncherFrame.COLOR_BUTTON_BLUE);
         openLogs.setHoverForeground(LauncherFrame.COLOR_BLUE);
         openLogs.setBorder(BorderFactory.createEmptyBorder(5, 17, 10, 17));
-        openLogs.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                openLogs();
-            }
-        });
+        openLogs.addActionListener(e -> openLogs());
         panel.add(openLogs, new GridBagConstraints(0, 8, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 10, 10, 0), 0, 0));
     }
 
@@ -1083,12 +1003,7 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         otherVersionButton.setContentAreaFilled(false);
         otherVersionButton.setForeground(LauncherFrame.COLOR_BUTTON_BLUE);
         otherVersionButton.setHoverForeground(LauncherFrame.COLOR_BLUE);
-        otherVersionButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                selectOtherVersion();
-            }
-        });
+        otherVersionButton.addActionListener(e -> selectOtherVersion());
         panel.add(otherVersionButton, new GridBagConstraints(2, 0, 5, 1, 2, 0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(8, 8, 8, 80), 0, 0));
 
         JLabel memLabel = new JLabel(resources.getString("launcheroptions.java.memory"));
@@ -1168,12 +1083,9 @@ public class OptionsDialog extends LauncherDialog implements IRelocalizableResou
         initComponents();
         initControlValues();
 
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                invalidate();
-                repaint();
-            }
+        EventQueue.invokeLater(() -> {
+            invalidate();
+            repaint();
         });
     }
 }

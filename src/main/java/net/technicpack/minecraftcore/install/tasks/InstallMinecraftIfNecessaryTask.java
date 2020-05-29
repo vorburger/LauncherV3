@@ -34,9 +34,9 @@ import java.io.IOException;
 
 public class InstallMinecraftIfNecessaryTask extends ListenerTask {
 
-	private ModpackModel pack;
-	private String minecraftVersion;
-	private File cacheDirectory;
+	private final ModpackModel pack;
+	private final String minecraftVersion;
+	private final File cacheDirectory;
 
 	public InstallMinecraftIfNecessaryTask(ModpackModel pack, String minecraftVersion, File cacheDirectory) {
 		this.pack = pack;
@@ -65,7 +65,7 @@ public class InstallMinecraftIfNecessaryTask extends ListenerTask {
 		String md5 = queue.getMirrorStore().getETag(url);
 		File cache = new File(cacheDirectory, "minecraft_" + this.minecraftVersion + ".jar");
 
-		IFileVerifier verifier = null;
+		IFileVerifier verifier;
 
 		if (md5 != null && !md5.isEmpty()) {
 			verifier = new MD5FileVerifier(md5);

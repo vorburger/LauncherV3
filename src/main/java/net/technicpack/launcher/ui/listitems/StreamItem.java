@@ -19,8 +19,8 @@
 package net.technicpack.launcher.ui.listitems;
 
 public class StreamItem  {
-    private String text;
-    private String stream;
+    private final String text;
+    private final String stream;
 
     public StreamItem(String text, String stream) {
         this.text = text;

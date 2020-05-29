@@ -101,7 +101,7 @@ public class RestObject {
                 }
 
                 JsonArray array = response.getAsJsonArray();
-                List<T> result = new ArrayList<T>(array.size());
+                List<T> result = new ArrayList<>(array.size());
 
                 for (JsonElement element : array) {
                     if (element.isJsonObject())

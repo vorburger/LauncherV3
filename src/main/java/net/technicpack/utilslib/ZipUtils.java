@@ -22,7 +22,6 @@ package net.technicpack.utilslib;
 import net.technicpack.launchercore.util.DownloadListener;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipFile;
-import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.nio.channels.ClosedByInterruptException;
@@ -67,10 +66,7 @@ public class ZipUtils {
             return false;
         }
 
-        ZipFile zipFile = null;
-
-        try {
-            zipFile = new ZipFile(zip);
+        try (ZipFile zipFile = new ZipFile(zip)) {
             ZipArchiveEntry entry = zipFile.getEntry(fileName);
             if (entry == null) {
                 Utils.getLogger().log(Level.WARNING, "File " + fileName + " not found in " + zip.getAbsolutePath());
@@ -93,10 +89,6 @@ public class ZipUtils {
         } catch (IOException e) {
             Utils.getLogger().log(Level.WARNING, "Error extracting file " + fileName + " from " + zip.getAbsolutePath());
             return false;
-        } finally {
-            if (zipFile != null) {
-                zipFile.close();
-            }
         }
     }
 

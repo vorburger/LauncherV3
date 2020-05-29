@@ -55,9 +55,9 @@ import java.util.logging.Level;
 
 public class LoginFrame extends DraggableFrame implements IRelocalizableResource, KeyListener, IAuthListener<MojangUser> {
     private ResourceLoader resources;
-    private ImageRepository<IUserType> skinRepository;
-    private UserModel<MojangUser> userModel;
-    private TechnicSettings settings;
+    private final ImageRepository<IUserType> skinRepository;
+    private final UserModel<MojangUser> userModel;
+    private final TechnicSettings settings;
 
     private JTextField name;
     private JComboBox nameSelect;
@@ -77,30 +77,27 @@ public class LoginFrame extends DraggableFrame implements IRelocalizableResource
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setBackground(LauncherFrame.COLOR_CENTRAL_BACK_OPAQUE);
 
-        this.setFocusTraversalPolicy(new SortingFocusTraversalPolicy(new Comparator<Component>() {
-            @Override
-            public int compare(Component o1, Component o2) {
-                //This long stupid stack of else/ifs enforces a tab order of
-                //Username -> Password -> Remember me -> any buttons -> everything else who cares
-                if (o1 == name || o1 == nameSelect)
-                    return -1;
-                else if (o2 == name || o2 == nameSelect)
-                    return 1;
-                else if (o1 == password)
-                    return -1;
-                else if (o2 == password)
-                    return 1;
-                else if (o1 == rememberAccount)
-                    return -1;
-                else if (o2 == rememberAccount)
-                    return 1;
-                else if (o1 instanceof AbstractButton)
-                    return -1;
-                else if (o2 instanceof AbstractButton)
-                    return 1;
-                else
-                    return 0;
-            }
+        this.setFocusTraversalPolicy(new SortingFocusTraversalPolicy((o1, o2) -> {
+            //This long stupid stack of else/ifs enforces a tab order of
+            //Username -> Password -> Remember me -> any buttons -> everything else who cares
+            if (o1 == name || o1 == nameSelect)
+                return -1;
+            else if (o2 == name || o2 == nameSelect)
+                return 1;
+            else if (o1 == password)
+                return -1;
+            else if (o2 == password)
+                return 1;
+            else if (o1 == rememberAccount)
+                return -1;
+            else if (o2 == rememberAccount)
+                return 1;
+            else if (o1 instanceof AbstractButton)
+                return -1;
+            else if (o2 instanceof AbstractButton)
+                return 1;
+            else
+                return 0;
         }));
 
         //Handles rebuilding the frame, so use it to build the frame in the first place
@@ -316,12 +313,7 @@ public class LoginFrame extends DraggableFrame implements IRelocalizableResource
         closeButton.setBorder(BorderFactory.createEmptyBorder());
         closeButton.setIcon(resources.getIcon("close.png"));
         closeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        closeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                closeButtonClicked();
-            }
-        });
+        closeButton.addActionListener(e -> closeButtonClicked());
         closeButton.setFocusable(false);
         add(closeButton, new GridBagConstraints(2,0,1,1, 0.0, 0.0, GridBagConstraints.NORTHEAST, GridBagConstraints.NONE, new Insets(7,0,0,7),0,0));
 
@@ -364,12 +356,7 @@ public class LoginFrame extends DraggableFrame implements IRelocalizableResource
         nameSelect.setEditor(userEditor);
         userEditor.addKeyListener(this);
         nameSelect.setUI(new SimpleButtonComboUI(new RoundedBorderFormatter(new RoundBorder(LauncherFrame.COLOR_BUTTON_BLUE, 1, 0)), resources, LauncherFrame.COLOR_SCROLL_TRACK, LauncherFrame.COLOR_SCROLL_THUMB));
-        nameSelect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changeUser();
-            }
-        });
+        nameSelect.addActionListener(e -> changeUser());
 
         add(nameSelect, new GridBagConstraints(0, 3, 3, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(3, 20, 0, 20), 4, 4));
 
@@ -395,12 +382,7 @@ public class LoginFrame extends DraggableFrame implements IRelocalizableResource
         password.setBackground(LauncherFrame.COLOR_FORMELEMENT_INTERNAL);
         password.addKeyListener(this);
         password.setEchoChar('*');
-        password.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                attemptLogin();
-            }
-        });
+        password.addActionListener(e -> attemptLogin());
         password.setCaretColor(LauncherFrame.COLOR_BUTTON_BLUE);
         add(password, new GridBagConstraints(0, 5, 3, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(3, 20, 0, 20), 4, 17));
 
@@ -417,12 +399,7 @@ public class LoginFrame extends DraggableFrame implements IRelocalizableResource
         rememberAccount.addKeyListener(this);
         rememberAccount.setSelectedIcon(resources.getIcon("checkbox_closed.png"));
         rememberAccount.setIcon(resources.getIcon("checkbox_open.png"));
-        rememberAccount.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                toggleRemember();
-            }
-        });
+        rememberAccount.addActionListener(e -> toggleRemember());
         rememberAccount.setFocusPainted(false);
         add(rememberAccount, new GridBagConstraints(1,6,2,1,1.0,0.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(24,20,0,20),0,0));
 
@@ -433,12 +410,7 @@ public class LoginFrame extends DraggableFrame implements IRelocalizableResource
         button.setContentAreaFilled(false);
         button.setForeground(LauncherFrame.COLOR_BUTTON_BLUE);
         button.setHoverForeground(LauncherFrame.COLOR_BLUE);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                attemptLogin();
-            }
-        });
+        button.addActionListener(e -> attemptLogin());
         add(button, new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(24,20,0,0),0,0));
 
         add(Box.createVerticalGlue(), new GridBagConstraints(0, 8, 3, 1, 1.0, 1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0,0,0,0),0,0));
@@ -478,12 +450,7 @@ public class LoginFrame extends DraggableFrame implements IRelocalizableResource
         languages.setRenderer(new LanguageCellRenderer(resources, "globe.png", LauncherFrame.COLOR_SELECTOR_BACK, LauncherFrame.COLOR_WHITE_TEXT));
         languages.setEditable(false);
         languages.setFocusable(false);
-        languages.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                languageChanged();
-            }
-        });
+        languages.addActionListener(e -> languageChanged());
         linkPane.add(languages);
 
         linkPane.add(Box.createHorizontalGlue());
@@ -494,12 +461,7 @@ public class LoginFrame extends DraggableFrame implements IRelocalizableResource
         termsLink.setForeground(LauncherFrame.COLOR_WHITE_TEXT);
         termsLink.setFont(resources.getFont(ResourceLoader.FONT_OPENSANS, 14));
         termsLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        termsLink.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                visitTerms();
-            }
-        });
+        termsLink.addActionListener(e -> visitTerms());
         linkPane.add(termsLink);
         linkPane.add(Box.createHorizontalStrut(8));
 
@@ -526,12 +488,9 @@ public class LoginFrame extends DraggableFrame implements IRelocalizableResource
 
         refreshUsers();
 
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                invalidate();
-                repaint();
-            }
+        EventQueue.invokeLater(() -> {
+            invalidate();
+            repaint();
         });
     }
 
@@ -546,12 +505,9 @@ public class LoginFrame extends DraggableFrame implements IRelocalizableResource
             else
                 name.grabFocus();
 
-            EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    invalidate();
-                    repaint();
-                }
+            EventQueue.invokeLater(() -> {
+                invalidate();
+                repaint();
             });
         } else
             this.setVisible(false);

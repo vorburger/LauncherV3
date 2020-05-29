@@ -49,7 +49,7 @@ public class PlatformPackInfo extends RestObject implements PackInfo {
     private boolean isOfficial;
     private String discordServerId;
 
-    private ArrayList<FeedItem> feed = new ArrayList<FeedItem>();
+    private final ArrayList<FeedItem> feed = new ArrayList<>();
 
     private transient boolean isLocal = false;
 
@@ -112,7 +112,7 @@ public class PlatformPackInfo extends RestObject implements PackInfo {
 
     @Override
     public List<String> getBuilds() {
-        List<String> builds = new ArrayList<String>();
+        List<String> builds = new ArrayList<>();
         builds.add(version);
         return builds;
     }
@@ -155,7 +155,7 @@ public class PlatformPackInfo extends RestObject implements PackInfo {
     public boolean isServerPack() { return isServer; }
 
     @Override
-    public Modpack getModpack(String build) throws BuildInaccessibleException {
+    public Modpack getModpack(String build) {
         return new Modpack(this);
     }
 

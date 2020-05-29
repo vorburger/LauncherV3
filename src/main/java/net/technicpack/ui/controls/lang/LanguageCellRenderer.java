@@ -27,11 +27,11 @@ import java.awt.*;
 
 public class LanguageCellRenderer  extends JLabel implements ListCellRenderer {
 
-    private ResourceLoader resources;
+    private final ResourceLoader resources;
     private ImageIcon globe;
 
-    private Color background;
-    private Color foreground;
+    private final Color background;
+    private final Color foreground;
 
     public LanguageCellRenderer(ResourceLoader resourceLoader, String langIcon, Color background, Color foreground) {
         resources = resourceLoader;

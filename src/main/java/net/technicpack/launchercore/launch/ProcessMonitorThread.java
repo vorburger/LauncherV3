@@ -35,7 +35,7 @@ public class ProcessMonitorThread extends Thread {
     public void run() {
         InputStreamReader reader = new InputStreamReader(this.process.getProcess().getInputStream());
         BufferedReader buf = new BufferedReader(reader);
-        String line = null;
+        String line;
 
         while (true) {
             try {

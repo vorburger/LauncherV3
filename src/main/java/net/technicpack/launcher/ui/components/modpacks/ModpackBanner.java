@@ -39,10 +39,10 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 public class ModpackBanner extends JPanel implements IImageJobListener<ModpackModel> {
-    private ResourceLoader resources;
-    private ImageRepository<ModpackModel> iconRepo;
+    private final ResourceLoader resources;
+    private final ImageRepository<ModpackModel> iconRepo;
     private ModpackModel currentModpack;
-    private ActionListener modpackOptionsListener;
+    private final ActionListener modpackOptionsListener;
 
     private JLabel modpackName;
     private JPanel modpackTags;
@@ -252,12 +252,7 @@ public class ModpackBanner extends JPanel implements IImageJobListener<ModpackMo
 
             modpackIcon.setIcon(new ImageIcon(icon));
             getParent().invalidate();
-            EventQueue.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    getParent().repaint();
-                }
-            });
+            EventQueue.invokeLater(() -> getParent().repaint());
         }
     }
 }

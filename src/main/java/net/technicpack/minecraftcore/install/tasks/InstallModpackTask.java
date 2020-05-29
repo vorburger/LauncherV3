@@ -97,7 +97,7 @@ public class InstallModpackTask implements IInstallTask {
 
 			File cache = new File(this.pack.getCacheDir(), name);
 
-            IFileVerifier verifier = null;
+            IFileVerifier verifier;
 
             if (md5 != null && !md5.isEmpty())
                 verifier = new MD5FileVerifier(md5);

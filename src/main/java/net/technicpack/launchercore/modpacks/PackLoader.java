@@ -28,9 +28,9 @@ import net.technicpack.launchercore.modpacks.sources.IPackSource;
 import java.util.Collection;
 
 public class PackLoader {
-    private IInstalledPackRepository packRepository;
-    private IAuthoritativePackSource authoritativeSource;
-    private LauncherDirectories directories;
+    private final IInstalledPackRepository packRepository;
+    private final IAuthoritativePackSource authoritativeSource;
+    private final LauncherDirectories directories;
 
     public PackLoader(LauncherDirectories directories, IInstalledPackRepository packStore, IAuthoritativePackSource packInfos) {
         this.packRepository = packStore;

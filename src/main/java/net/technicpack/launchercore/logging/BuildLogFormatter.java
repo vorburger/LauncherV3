@@ -27,7 +27,7 @@ import java.util.logging.LogRecord;
 
 public class BuildLogFormatter extends Formatter {
     private final SimpleDateFormat date;
-    private String launcherBuild;
+    private final String launcherBuild;
 
     public BuildLogFormatter(String launcherBuild) {
         date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -38,7 +38,7 @@ public class BuildLogFormatter extends Formatter {
     public String format(LogRecord record) {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("[B#" + launcherBuild + "] ");
+        builder.append("[B#").append(launcherBuild).append("] ");
         builder.append(date.format(record.getMillis()));
         builder.append(" [");
         builder.append(record.getLevel().getLocalizedName().toUpperCase());

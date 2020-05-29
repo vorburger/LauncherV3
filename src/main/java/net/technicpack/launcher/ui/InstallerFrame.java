@@ -65,12 +65,12 @@ public class InstallerFrame extends DraggableFrame implements IRelocalizableReso
     private RoundedButton standardSelectButton;
     private JTextField portableInstallDir;
     private RoundedButton portableInstallButton;
-    private StartupParameters params;
+    private final StartupParameters params;
 
     private JComboBox standardLanguages;
     private JComboBox portableLanguages;
 
-    private TechnicSettings settings;
+    private final TechnicSettings settings;
 
     private JPanel glassPane;
 
@@ -208,7 +208,7 @@ public class InstallerFrame extends DraggableFrame implements IRelocalizableReso
     }
 
     protected void portableInstall() {
-        String targetPath = null;
+        String targetPath;
         final Relauncher relauncher = new TechnicRelauncher(null, settings.getBuildStream(), 0, new TechnicLauncherDirectories(settings.getTechnicRoot()), resources, params);
         try {
             String currentPath = relauncher.getRunningPath();

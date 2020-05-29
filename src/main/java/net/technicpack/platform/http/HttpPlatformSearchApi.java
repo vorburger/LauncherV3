@@ -28,8 +28,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 public class HttpPlatformSearchApi implements IPlatformSearchApi {
-    private String rootUrl;
-    private String launcherBuild;
+    private final String rootUrl;
+    private final String launcherBuild;
 
     public HttpPlatformSearchApi(String rootUrl, String launcherBuild) {
         this.rootUrl = rootUrl;

@@ -37,13 +37,13 @@ import java.util.*;
 import java.util.logging.Level;
 
 public class ResourceLoader {
-    private Collection<IRelocalizableResource> resources = new LinkedList<>();
+    private final Collection<IRelocalizableResource> resources = new LinkedList<>();
     private ResourceBundle stringData;
     private Locale currentLocale;
-    private String dottedResourcePath;
-    private String slashResourcePath;
+    private final String dottedResourcePath;
+    private final String slashResourcePath;
     private boolean isDefaultLocaleSupported = true;
-    private Locale defaultLocale;
+    private final Locale defaultLocale;
     private File launcherAssets;
     private Locale[] locales = { Locale.ENGLISH };
 

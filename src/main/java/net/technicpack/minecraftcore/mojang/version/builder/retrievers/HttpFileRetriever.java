@@ -30,9 +30,9 @@ import java.io.IOException;
 
 public class HttpFileRetriever implements MojangVersionRetriever {
 
-    private MirrorStore mirrorStore;
-    private String baseUrl;
-    private DownloadListener listener;
+    private final MirrorStore mirrorStore;
+    private final String baseUrl;
+    private final DownloadListener listener;
 
     public HttpFileRetriever(MirrorStore mirrorStore, String baseUrl, DownloadListener listener) {
         this.mirrorStore = mirrorStore;

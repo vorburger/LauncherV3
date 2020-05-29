@@ -32,9 +32,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 public class PackImageStore implements IImageStore<ModpackModel> {
-    private IModpackResourceType resourceType;
-    private MirrorStore mirrorStore;
-    private UserModel userModel;
+    private final IModpackResourceType resourceType;
+    private final MirrorStore mirrorStore;
+    private final UserModel userModel;
 
     public PackImageStore(IModpackResourceType resourceType, MirrorStore mirrorStore, UserModel userModel) {
         this.resourceType = resourceType;
@@ -61,7 +61,6 @@ public class PackImageStore implements IImageStore<ModpackModel> {
             mirrorStore.downloadFile(res.getUrl(), userModel.getCurrentUser().getDisplayName(), target.getAbsolutePath());
         } catch (InterruptedException ex) {
             //user cancel
-            return;
         } catch (IOException e) {
             Utils.getLogger().log(Level.INFO, "Error downloading pack resource " + res.getUrl() + " for pack " + key.getName(), e);
         }

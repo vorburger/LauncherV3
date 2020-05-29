@@ -23,7 +23,7 @@ import net.technicpack.minecraftcore.mojang.version.io.ExtractRules;
 import net.technicpack.utilslib.IZipFileFilter;
 
 public class ExtractRulesFileFilter implements IZipFileFilter {
-    private ExtractRules rules;
+    private final ExtractRules rules;
 
     public ExtractRulesFileFilter(ExtractRules rules) {
         this.rules = rules;

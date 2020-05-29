@@ -28,8 +28,8 @@ import java.io.IOException;
 import java.util.Collection;
 
 public class DownloadUpdate extends DownloadFileTask {
-    private Relauncher relauncher;
-    private Collection<IInstallTask> postUpdateActions;
+    private final Relauncher relauncher;
+    private final Collection<IInstallTask> postUpdateActions;
 
     public DownloadUpdate(String url, Relauncher relauncher, Collection<IInstallTask> postUpdateActions) {
         super(url, relauncher.getTempLauncher(), null, relauncher.getUpdateText());

@@ -21,8 +21,8 @@ package net.technicpack.launcher.ui.listitems;
 import net.technicpack.launchercore.util.LaunchAction;
 
 public class OnLaunchItem {
-    private String text;
-    private LaunchAction launchAction;
+    private final String text;
+    private final LaunchAction launchAction;
 
     public OnLaunchItem(String text, LaunchAction action) {
         this.text = text;

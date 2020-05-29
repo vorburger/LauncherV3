@@ -43,11 +43,6 @@ public class HorizontalGallery extends JPanel {
     }
 
     @Override
-    public Dimension getPreferredSize() {
-        return super.getPreferredSize();
-    }
-
-    @Override
     public void setBounds(int x, int y, int w, int h) {
         super.setBounds(x,y,w,h);
     }
@@ -202,7 +197,7 @@ public class HorizontalGallery extends JPanel {
     }
 
     protected boolean seekForwardToComponent(Component component) {
-        Component lastComponent = null;
+        Component lastComponent;
         boolean didMoveGallery = false;
         do {
             lastComponent = getSelectedComponent();
@@ -218,7 +213,7 @@ public class HorizontalGallery extends JPanel {
     }
 
     protected boolean seekBackwardToComponent(Component component) {
-        Component lastComponent = null;
+        Component lastComponent;
         boolean didMoveGallery = false;
         do {
             lastComponent = getSelectedComponent();

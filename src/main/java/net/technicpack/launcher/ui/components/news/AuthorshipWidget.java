@@ -32,7 +32,7 @@ import java.util.Date;
 
 public class AuthorshipWidget extends JPanel implements IImageJobListener<AuthorshipInfo> {
     private JLabel avatarView;
-    private ResourceLoader resources;
+    private final ResourceLoader resources;
     private JLabel authorName;
     private JLabel postTime;
 

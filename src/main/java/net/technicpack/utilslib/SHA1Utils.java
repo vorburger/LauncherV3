@@ -34,8 +34,6 @@ public class SHA1Utils {
             String sha1 = DigestUtils.sha1Hex(fis);
             fis.close();
             return sha1;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

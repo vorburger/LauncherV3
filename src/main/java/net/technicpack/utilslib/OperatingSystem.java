@@ -32,7 +32,7 @@ public enum OperatingSystem {
     private final String name;
     private final String[] aliases;
 
-    private OperatingSystem(String name, String[] aliases) {
+    OperatingSystem(String name, String[] aliases) {
         this.name = name;
         this.aliases = aliases;
     }
@@ -85,7 +85,6 @@ public enum OperatingSystem {
             case OSX:
                 return new File(userHome, "Library/Application Support/" + appName);
             case UNKNOWN:
-                return new File(userHome, appName + "/");
             default:
                 return new File(userHome, appName + "/");
         }

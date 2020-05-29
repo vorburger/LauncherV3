@@ -34,9 +34,9 @@ import java.util.List;
 
 public abstract class Relauncher {
 
-    private String stream;
-    private int currentBuild;
-    private LauncherDirectories directories;
+    private final String stream;
+    private final int currentBuild;
+    private final LauncherDirectories directories;
     private boolean didUpdate = false;
 
     public Relauncher(String stream, int currentBuild, LauncherDirectories directories) {
@@ -85,7 +85,7 @@ public abstract class Relauncher {
                 needsReboot = true;
         }
 
-        InstallTasksQueue updateTasksQueue = null;
+        InstallTasksQueue updateTasksQueue;
         if (isMover()) {
             updateTasksQueue = buildMoverTasks();
         } else if (needsReboot && getCurrentBuild() > 0) {
@@ -112,7 +112,7 @@ public abstract class Relauncher {
 
     public File getTempLauncher() {
         File dest;
-        String runningPath = null;
+        String runningPath;
 
         try {
             runningPath = getRunningPath();
@@ -138,7 +138,7 @@ public abstract class Relauncher {
         }
 
         ProcessBuilder processBuilder = new ProcessBuilder();
-        ArrayList<String> commands = new ArrayList<String>();
+        ArrayList<String> commands = new ArrayList<>();
         if (!launchPath.endsWith(".exe")) {
             commands.add(OperatingSystem.getJavaDir());
             commands.add("-Xmx256m");
@@ -153,10 +153,10 @@ public abstract class Relauncher {
             commands.add(launchPath);
         commands.addAll(Arrays.asList(args));
 
-        String command = "";
+        StringBuilder command = new StringBuilder();
 
         for (String token : commands) {
-            command += token + " ";
+            command.append(token).append(" ");
         }
 
         Utils.getLogger().info("Launching command: '" + command + "'");
@@ -175,22 +175,22 @@ public abstract class Relauncher {
     }
 
     public String[] buildMoverArgs() throws UnsupportedEncodingException {
-        List<String> outArgs = new ArrayList<String>();
+        List<String> outArgs = new ArrayList<>();
         outArgs.add("-movetarget");
         outArgs.add(getRunningPath());
         outArgs.add("-moveronly");
         outArgs.addAll(Arrays.asList(getLaunchArgs()));
-        return outArgs.toArray(new String[outArgs.size()]);
+        return outArgs.toArray(new String[0]);
     }
 
     public String[] buildLauncherArgs(boolean isLegacy) {
-        List<String> outArgs = new ArrayList<String>();
+        List<String> outArgs = new ArrayList<>();
         if (!isLegacy)
             outArgs.add("-launcheronly");
         else
             outArgs.add("-launcher");
         outArgs.addAll(Arrays.asList(getLaunchArgs()));
         outArgs.remove("-moveronly");
-        return outArgs.toArray(new String[outArgs.size()]);
+        return outArgs.toArray(new String[0]);
     }
 }

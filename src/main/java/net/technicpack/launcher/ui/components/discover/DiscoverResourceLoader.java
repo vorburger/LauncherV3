@@ -23,18 +23,14 @@ import java.util.Map;
 import java.util.logging.Level;
 
 public class DiscoverResourceLoader extends ImageResourceLoader {
-    public static final RepaintListener NO_OP_REPAINT_LISTENER = new RepaintListener() {
-        public void repaintRequested(boolean doLayout) {
-            XRLog.general(Level.FINE, "No-op repaint requested");
-        }
-    };
+    public static final RepaintListener NO_OP_REPAINT_LISTENER = doLayout -> XRLog.general(Level.FINE, "No-op repaint requested");
     private final Map _imageCache;
 
     private final ImageLoadQueue _loadQueue;
 
     private final int _imageCacheCapacity;
 
-    private RepaintListener _repaintListener = NO_OP_REPAINT_LISTENER;
+    private RepaintListener _repaintListener;
 
     private final boolean _useBackgroundImageLoading;
 

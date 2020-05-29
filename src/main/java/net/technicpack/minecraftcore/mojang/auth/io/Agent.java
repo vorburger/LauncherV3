@@ -20,8 +20,8 @@
 package net.technicpack.minecraftcore.mojang.auth.io;
 
 public class Agent {
-	private String name;
-	private int version;
+	private final String name;
+	private final int version;
 
 	public Agent(String name, int version) {
 		this.name = name;

@@ -32,14 +32,14 @@ import java.awt.*;
 import java.util.HashMap;
 
 public class UserCellRenderer extends AdvancedCellRenderer implements ListCellRenderer, IImageJobListener<IUserType> {
-    private Icon addUserIcon;
+    private final Icon addUserIcon;
 
-    private ImageRepository<IUserType> mSkinRepo;
+    private final ImageRepository<IUserType> mSkinRepo;
 
     private static final int ICON_WIDTH = 32;
     private static final int ICON_HEIGHT = 32;
 
-    private HashMap<String, Icon> headMap = new HashMap<String, Icon>();
+    private final HashMap<String, Icon> headMap = new HashMap<>();
 
     public UserCellRenderer(ResourceLoader resources, ImageRepository<IUserType> skinRepo) {
         this.mSkinRepo = skinRepo;
@@ -84,8 +84,7 @@ public class UserCellRenderer extends AdvancedCellRenderer implements ListCellRe
     @Override
     public void jobComplete(ImageJob<IUserType> job) {
         IUserType mojangUser = job.getJobData();
-        if (headMap.containsKey(mojangUser.getUsername()))
-            headMap.remove(mojangUser.getUsername());
+        headMap.remove(mojangUser.getUsername());
 
         headMap.put(mojangUser.getUsername(), new ImageIcon(ImageUtils.scaleImage(job.getImage(), ICON_WIDTH, ICON_HEIGHT)));
 

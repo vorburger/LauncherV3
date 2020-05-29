@@ -27,27 +27,27 @@ public final class StartupParameters {
     @SuppressWarnings("unused")
     private final String[] args;
     @Parameter
-    private List<String> parameters = Lists.newArrayList();
+    private final List<String> parameters = Lists.newArrayList();
     @Parameter(names = {"-console"}, description = "Shows the console window")
-    private boolean console = false;
+    private final boolean console = false;
     @Parameter(names = {"-launcheronly"}, description = "Starts in launcher mode (rather than update/mover)")
-    private boolean launcher = false;
+    private final boolean launcher = false;
     @Parameter(names = {"-launcher"}, description = "Legacy launcher mode (indicates we should do a full update)")
-    private boolean oldLauncher = false;
+    private final boolean oldLauncher = false;
     @Parameter(names = {"-moveronly"}, description = "Starts in mover mode (copies recently-downloaded update to originally-run package)")
-    private boolean mover = false;
+    private final boolean mover = false;
     @Parameter(names = {"-mover"}, description = "Legacy mover mode- used to detect old-updater clients trying to update")
-    private boolean oldMover = false;
+    private final boolean oldMover = false;
     @Parameter(names = {"-update"}, description = "Starts in update mode (closes after downloading updated resources)")
-    private boolean update = false;
+    private final boolean update = false;
     @Parameter(names = {"-movetarget"}, description = "The path of the originally-run package to copy to")
-    private String moveTarget = null;
+    private final String moveTarget = null;
     @Parameter(names = {"-discover"}, description = "An override param for the discover URL")
-    private String discover = null;
+    private final String discover = null;
     @Parameter(names = {"-blockReboot"}, description = "Prevent rebooting the launcher due to bad java properties.")
-    private boolean blockReboot = false;
+    private final boolean blockReboot = false;
     @Parameter(names = {"-buildNumber"}, description = "Force build number to this value for debugging.")
-    private String buildNumber = "";
+    private final String buildNumber = "";
 
     public StartupParameters(String[] args) {
         this.args = args;

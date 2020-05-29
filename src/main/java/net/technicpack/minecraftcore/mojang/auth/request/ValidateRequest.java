@@ -20,7 +20,7 @@
 package net.technicpack.minecraftcore.mojang.auth.request;
 
 public class ValidateRequest {
-	private String accessToken;
+	private final String accessToken;
 
 	public ValidateRequest(String accessToken) {
 		this.accessToken = accessToken;

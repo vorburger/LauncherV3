@@ -37,8 +37,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MirrorStore {
-    Map<String, SecureToken> secureMirrors = new HashMap<String, SecureToken>();
-    private UserModel userModel;
+    final Map<String, SecureToken> secureMirrors = new HashMap<>();
+    private final UserModel userModel;
 
     public MirrorStore(UserModel userModel) {
         this.userModel = userModel;
@@ -51,7 +51,7 @@ public class MirrorStore {
     }
 
     public URL getFullUrl(String url) throws DownloadException {
-        URL urlObject = null;
+        URL urlObject;
 
         try {
             urlObject = new URL(url);
@@ -96,8 +96,6 @@ public class MirrorStore {
                     md5 = eTag;
                 }
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -155,9 +153,7 @@ public class MirrorStore {
         if (downloadHost != null && !downloadHost.isEmpty()) {
             try {
                 url = new URI(url.getProtocol(), url.getUserInfo(), downloadHost, url.getPort(), url.getPath(), url.getQuery(), null).toURL();
-            } catch (URISyntaxException ex) {
-                //Ignore, just keep old url
-            } catch (MalformedURLException ex) {
+            } catch (URISyntaxException | MalformedURLException ex) {
                 //Ignore, just keep old url
             }
         }

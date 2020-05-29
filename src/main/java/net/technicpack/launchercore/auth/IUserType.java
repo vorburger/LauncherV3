@@ -20,9 +20,9 @@
 package net.technicpack.launchercore.auth;
 
 public interface IUserType {
-    public String getId();
+    String getId();
 
-    public String getUsername();
+    String getUsername();
 
-    public String getDisplayName();
+    String getDisplayName();
 }

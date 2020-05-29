@@ -4,7 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 public class UserProperties {
-    private Multimap<String, String> internalMap;
+    private final Multimap<String, String> internalMap;
 
     public UserProperties() {
         this.internalMap = HashMultimap.create();

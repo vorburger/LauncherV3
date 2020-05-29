@@ -27,16 +27,16 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 public class InstallTasksQueue<Metadata> implements ITasksQueue {
-    private DownloadListener listener;
-    private LinkedList<IInstallTask> tasks;
+    private final DownloadListener listener;
+    private final LinkedList<IInstallTask> tasks;
     private IInstallTask currentTask;
-    private MirrorStore mirrorStore;
+    private final MirrorStore mirrorStore;
     private Metadata metadata;
 
     public InstallTasksQueue(DownloadListener listener, MirrorStore mirrorStore) {
         this.listener = listener;
         this.mirrorStore = mirrorStore;
-        this.tasks = new LinkedList<IInstallTask>();
+        this.tasks = new LinkedList<>();
         this.currentTask = null;
     }
 

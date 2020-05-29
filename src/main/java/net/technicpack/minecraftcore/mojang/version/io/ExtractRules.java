@@ -24,7 +24,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ExtractRules {
-	private List<String> exclude = new ArrayList<String>();
+	private final List<String> exclude = new ArrayList<>();
 
 	public ExtractRules() {
 

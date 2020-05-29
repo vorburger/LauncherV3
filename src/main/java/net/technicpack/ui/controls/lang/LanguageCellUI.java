@@ -31,12 +31,12 @@ import java.awt.*;
 
 public class LanguageCellUI extends BasicComboBoxUI {
 
-    private ResourceLoader resources;
+    private final ResourceLoader resources;
 
-    private Color trackColor;
-    private Color thumbColor;
+    private final Color trackColor;
+    private final Color thumbColor;
 
-    private IPopupFormatter popupFormatter;
+    private final IPopupFormatter popupFormatter;
 
     public LanguageCellUI(ResourceLoader loader, IPopupFormatter popupFormatter, Color trackColor, Color thumbColor) {
         this.resources = loader;
